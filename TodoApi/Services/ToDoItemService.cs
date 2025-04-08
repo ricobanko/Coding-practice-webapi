@@ -62,6 +62,11 @@ public class ToDoItemService : IToDoService
     {
         var todoItem = await GetItem(id);
 
+        if (todoItem is null)
+        {
+            return null;
+        }
+
         todoItem.Name = TodoItemDTO.Name;
         todoItem.IsComplete = TodoItemDTO.IsComplete;
 

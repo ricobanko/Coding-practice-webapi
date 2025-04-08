@@ -7,7 +7,7 @@ public class TodoItemDTO
     public long Id { get; set; }
 
     [Required]
-    [StringLength(100)]
+    [StringLength(20)]
     public string? Name { get; set; }
 
     [Required]

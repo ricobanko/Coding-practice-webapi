@@ -15,10 +15,10 @@ public class TodoItemDTOModelBinder : IModelBinder
 
         var request = bindingContext.HttpContext.Request;
 
-        foreach (var header in request.Headers)
-        {
-            Console.WriteLine($"Request header: {header}");
-        }
+        //foreach (var header in request.Headers)
+        //{
+        //    Console.WriteLine($"Request header: {header}");
+        //}
 
         // Read the request body
         using var reader = new StreamReader(request.Body);

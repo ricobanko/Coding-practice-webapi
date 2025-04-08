@@ -2,6 +2,8 @@ using Microsoft.EntityFrameworkCore;
 using TodoApi.Models;
 using TodoApi.Services;
 using TodoApi.CustomBinders;
+using Microsoft.AspNetCore.Builder;
+using TodoApi.Controllers.ExceptionFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,7 @@ builder.Services.AddDbContext<TodoContext>(opt =>
 builder.Services.AddControllers(options => 
 { 
     options.ModelBinderProviders.Insert(0, new TodoItemDTOModelBinderProvider());
+    options.Filters.Add<CustomExceptionFilterTest>();
 });
 
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -24,7 +27,12 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
     app.MapOpenApi();
+} 
+else 
+{
+    app.UseExceptionHandler("/error");
 }
 
 app.UseHttpsRedirection();

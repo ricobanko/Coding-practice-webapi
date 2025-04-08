@@ -19,14 +19,14 @@ GET {{TodoApi_HostAddress}}/api/todoitems/{{id}}
 
 ###
 
-@idToPut=3
+@idToPut=1
 PUT {{TodoApi_HostAddress}}/api/todoitems/{{idToPut}}
 Content-Type: application/json
 
 {
-  "id": 3,
-  "name": "feed fish",
-  "isComplete": false
+  "Id": {{idToPut}},
+  "Name": "feed fish",
+  "IsComplete": false
 }
 
 ### Delete Request
@@ -42,5 +42,9 @@ Content-Type: application/json
 {
   //TodoItem
 }
+
+###
+
+GET {{TodoApi_HostAddress}}/api/todoitems/trigger-exception
 
 ###

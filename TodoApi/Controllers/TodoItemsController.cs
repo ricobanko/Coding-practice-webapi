@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TodoApi.Controllers.ExceptionFilters;
 using TodoApi.Models;
 using TodoApi.Services;
 
@@ -44,7 +45,13 @@ namespace TodoApi.Controllers
             }
 
             var updatedTodoItemDto = await _toDoService.PutTodoItemDTO(id, todoItemDto);
-            return CreatedAtAction(nameof(GetTodoItem), new { updatedTodoItemDto.Id }, updatedTodoItemDto);
+
+            if (updatedTodoItemDto is null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
         }
 
         // POST: api/TodoItems
@@ -68,6 +75,12 @@ namespace TodoApi.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("trigger-exception")]
+        public IActionResult TriggerException()
+        {
+            throw new Exception("This is a test exception!");
         }
     }
 }
