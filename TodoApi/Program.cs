@@ -4,6 +4,7 @@ using TodoApi.Services;
 using TodoApi.CustomBinders;
 using Microsoft.AspNetCore.Builder;
 using TodoApi.Controllers.ExceptionFilters;
+using TodoApi.Middleware;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,5 +39,6 @@ else
 app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
+app.UseRequestMiddlewareTest();
 
 app.Run();
